@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Dec 10 12:12:30 2019
+Created December 2019
 
 Author: R Martin, The University of Leeds, 201369797
+
+Application to identify icebergs from .lidar and .radar files, assess their
+towability and present the outcomes, including iceberg metadata, on a GUI
+
+https://www.geog.leeds.ac.uk/courses/computing/study/core-python/assessment2/ice.html
 
 """
 
@@ -11,6 +16,7 @@ import matplotlib.colors
 import matplotlib.pyplot as mpl
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg)
 import tkinter
+
 
 #  open files
 with open("white2.radar") as f: # open radar file
@@ -43,6 +49,7 @@ with open("white2.lidar") as f: # open lidar file
 ## check has correctly read lidar data
 #mpl.title("Lidar data")  
 #mpl.imshow(lidarenv)
+
         
 # create copies of the data which can be altered without damaging orginal files
 templidar = lidarenv
@@ -253,10 +260,12 @@ while a < num_of_bergs:
     a += 1
 #    print('new a:', a)
 
+
 # displaying berg towability if using backend 'inline' and image appears in console
 #mpl.title('Icebergs locations and tow-ability')
 #cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", ["#d73027","#92c5de","#33a02c"]) # red, blue, green
 #mpl.imshow(bergtowability, cmap = cmap)
+
 
 # set up GUI
 root = tkinter.Tk()
@@ -281,9 +290,8 @@ button1 = tkinter.Button(master=root, text="Exit", command=close)
 button1.pack(side=tkinter.BOTTOM)
 
 button2 = tkinter.Button(master=root, text="Show towability values", command=printoutputs)
-button2.pack(side=tkinter.BOTTOM)
+button2.pack(side=tkinter.TOP)
     
-
 menubar = tkinter.Menu(root)
 root.config(menu=menubar)
 model_menu = tkinter.Menu(menubar)
