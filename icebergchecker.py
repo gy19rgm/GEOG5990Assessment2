@@ -176,7 +176,7 @@ while a < num_of_bergs:
     a += 1
 
 # final statement concluding 
-print('Finished searching ocean for icebergs...')
+print('Finished searching ocean for icebergs!')
 
 
 # set up data ready for displaying figure of towability
@@ -223,3 +223,4 @@ while a < num_of_bergs:
 mpl.title('Icebergs locations and tow-ability')
 cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", ["#d73027","#92c5de","#33a02c"]) # red, blue, green
 mpl.imshow(bergtowability, cmap = cmap)
+mpl.savefig(bergtowability.png)

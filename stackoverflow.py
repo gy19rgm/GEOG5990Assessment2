@@ -1,10 +1,62 @@
 # -*- coding: utf-8 -*-
 """
+Created on Tue Jan 14 14:03:39 2020
+
+Author: R Martin, The University of Leeds, 201369797
+
+"""
+# Embed a pyplot in a tkinter window and update it - stackoverflow
+import tkinter
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg)
+import matplotlib.pyplot as mpl
+import numpy as np
+
+root = tkinter.Tk()
+root.wm_title("White Star Line icebergs")
+
+fig = mpl.figure(1)
+t = np.arange(0.0,3.0,0.01)
+s = np.sin(np.pi*t)
+mpl.plot(t,s)
+
+canvas = FigureCanvasTkAgg(fig, master=root)
+canvas.draw()
+canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
+
+def close():
+    root.destroy()
+
+button = tkinter.Button(master=root, text="Exit", command=close)
+button.pack(side=tkinter.BOTTOM)
+
+menubar = tkinter.Menu(root)
+root.config(menu=menubar)
+model_menu = tkinter.Menu(menubar)
+menubar.add_cascade(label="Model", menu=model_menu)
+model_menu.add_command(label="Close model", command=close)
+
+tkinter.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+# -*- coding: utf-8 -*-
+"""
 Created on Tue Jan 14 21:05:08 2020
 
 @author: Perfe
 """
 '''
+# placing pot in tkinter main window in python - stackoverflow
 __author__ = 'Dania'
 import matplotlib
 matplotlib.use('TkAgg')
@@ -97,43 +149,3 @@ tkinter.mainloop()
 '''
 
 
-
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jan 14 14:03:39 2020
-
-Author: R Martin, The University of Leeds, 201369797
-
-"""
-
-import tkinter
-from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg)
-import matplotlib.pyplot as mpl
-
-import numpy as np
-
-root = tkinter.Tk()
-root.wm_title("White Star Line icebergs")
-
-fig = mpl.figure(1)
-t = np.arange(0.0,3.0,0.01)
-s = np.sin(np.pi*t)
-mpl.plot(t,s)
-
-canvas = FigureCanvasTkAgg(fig, master=root)
-canvas.draw()
-canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
-
-def close():
-    root.destroy()
-
-button = tkinter.Button(master=root, text="Exit", command=close)
-button.pack(side=tkinter.BOTTOM)
-
-menubar = tkinter.Menu(root)
-root.config(menu=menubar)
-model_menu = tkinter.Menu(menubar)
-menubar.add_cascade(label="Model", menu=model_menu)
-model_menu.add_command(label="Close model", command=close)
-
-tkinter.mainloop()
