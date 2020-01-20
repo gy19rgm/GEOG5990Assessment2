@@ -4,7 +4,7 @@ Created December 2019
 
 Author: R Martin, The University of Leeds, 201369797
 
-Application to identify icebergs from .lidar and .radar files, assess their
+Application to display icebergs from .radar and .lidar files, assess their
 towability and present the outcomes, including iceberg metadata, on a GUI
 
 https://www.geog.leeds.ac.uk/courses/computing/study/core-python/assessment2/ice.html
@@ -122,7 +122,7 @@ def berg_footprint(tempradar, templidar, i, j):
         if j == 299: # if on last column
             if i == 299: # and if on last row
                 carry_on = False # stop
-                print('carry on is false - bottom corner')
+#                print('carry on is false - bottom corner')
                 
         elif radarenv[i][j+1] == 0: # if next area has no ice
                 carry_on = False # stop
@@ -141,7 +141,7 @@ def berg_footprint(tempradar, templidar, i, j):
         
         while jj < (berg_start_col[num_of_bergs-1] + dimension):
             
-#            print('ii:', ii, 'jj', jj)
+#            print('ii:', ii, 'jj:', jj)
 #            print('start height:', height)
 #            print('cell value:', templidar[ii][jj])
             height = height + templidar[ii][jj]
@@ -150,10 +150,10 @@ def berg_footprint(tempradar, templidar, i, j):
             tempradar[ii][jj] = 0 # set radar to 0 so we know we have looked at ice here
                        
             jj += 1
-#            print('after jj, ii:', ii)
+#            print('added j value:', jj)
        
         ii = ii + 1
-#        print('added i value:', i)
+#        print('added i value:', ii)
 
     mass = (height*900) # mass kg
     
@@ -167,7 +167,7 @@ def berg_footprint(tempradar, templidar, i, j):
 find_ice(tempradar, templidar)
 
 
-## Return information about iceberg and print into console
+## Return information about iceberg and print onto console
 #a = 0 # set counter to 0 ready for while loop
 #while a < num_of_bergs:
 #    print('Iceberg', a+1, 'is', berg_tot_height[a], 'm3 and weighs', berg_mass[a], 'kg') # tot height + m3 are the same because counted up total 1m3 squares
@@ -247,13 +247,10 @@ while a < num_of_bergs:
             else:
                 bergtowability[ii][jj] = 0
 #                print('added 2 to NOT toable')
-           
-            
-#            print('end jj:', jj)
+                       
             jj += 1
 #            print('added 1 to j:', jj)
         
-#        print('end ii:', ii)
         ii = ii + 1
 #        print('added 1 to i:', ii)
     
@@ -289,13 +286,14 @@ def close():
 button1 = tkinter.Button(master=root, text="Exit", command=close)
 button1.pack(side=tkinter.BOTTOM)
 
-button2 = tkinter.Button(master=root, text="Show towability values", command=printoutputs)
+button2 = tkinter.Button(master=root, text="Show tow-ability values", command=printoutputs)
 button2.pack(side=tkinter.TOP)
     
 menubar = tkinter.Menu(root)
 root.config(menu=menubar)
 model_menu = tkinter.Menu(menubar)
 menubar.add_cascade(label="File", menu=model_menu)
+model_menu.add_command(label="Show tow-ability values", command=printoutputs)
 model_menu.add_command(label="Exit model", command=close)
 
 tkinter.mainloop()
