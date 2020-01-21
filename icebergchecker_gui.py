@@ -4,8 +4,8 @@ Created December 2019
 
 Author: R Martin, The University of Leeds, 201369797
 
-Application to display icebergs from .radar and .lidar files, assess their
-towability and present the outcomes, including iceberg metadata, on a GUI
+Application to identify icebergs from .radar and .lidar files, assess their
+towability and display the outcomes, including iceberg metadata, onto a GUI
 
 https://www.geog.leeds.ac.uk/courses/computing/study/core-python/assessment2/ice.html
 
@@ -18,8 +18,8 @@ from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg)
 import tkinter
 
 
-#  open files
-with open("white2.radar") as f: # open radar file
+# open radar file - 300m x 300m grid of m3 values between 0 and 255 where 100 or above is ice
+with open("white2.radar") as f:
     radarenv = []
     for line in f:
         parsed_line = str.split(line, ",")
@@ -37,7 +37,8 @@ numcols = len(radarenv[0])
 #mpl.title("Radar data")        
 #mpl.imshow(radarenv)
 
-with open("white2.lidar") as f: # open lidar file
+# open lidar file - 300m x 300m grid of m3 value between 0 and 255 where one lidar unit equals 10cm in height
+with open("white2.lidar") as f:
     lidarenv = []
     for line in f:
         parsed_line = str.split(line, ",")
@@ -51,11 +52,11 @@ with open("white2.lidar") as f: # open lidar file
 #mpl.imshow(lidarenv)
 
         
-# create copies of the data which can be altered without damaging orginal files
+# create copies of the data which can be altered without having to alter the orginal files
 templidar = lidarenv
 tempradar = radarenv 
 
-# set up lists for data that will be calculated for each iceberg
+# set up blank lists and counters for data that will be calculated for each iceberg
 berg_tot_height = []
 berg_mass = []
 berg_dimension = []
@@ -67,11 +68,18 @@ num_of_bergs = 0
 def find_ice(tempradar, templidar):
     
     '''
-    Function to identity the location of any icebergs present, and return its 
-    mass
+    Function to identity the location of any icebergs present 
     
-    Params: tempradar, templidar
-    Returns: iceberg number and its total mass (kg)
+    Check every cell in the radar file to see if an iceberg is present (radar
+    value will be greater than 100 if ice is present). Pass to next cell if no
+    ice found. If ice is found, add one to total number of icebergs, print 
+    iceberg found, and its number and call function berg_footprint
+        
+    Params:
+        tempradar - copy of the radarenv 2D array file
+        templidar - copy of the lidarenv 2D array file
+    Returns: 
+        print statement - iceberg found and its number
     '''
     
     global num_of_bergs
@@ -80,10 +88,10 @@ def find_ice(tempradar, templidar):
         for j in range(numcols):
             
 #            print('///i,j:', i, j)
-            if int(tempradar[i][j])<100: # means it isn't ice
+            if int(tempradar[i][j])<100: # if texture shows no ice present
                 pass
                     
-            else:
+            else: # if texture shows ice is present
                 num_of_bergs += 1
                 
                 print('iceberg', num_of_bergs, 'found')
@@ -95,14 +103,26 @@ def find_ice(tempradar, templidar):
 def berg_footprint(tempradar, templidar, i, j):
     
     '''
-    Function to identify the length of a row of an icebergs, then, assuming
-    all icebergs are square, calculate their mass
+    Function to trace iceberg footprint and append iceberg values
     
-    Params: tempradar, templidar, i , j
-    Returns: xxxx
+    This function will only be called if the find_ice function has identified
+    the presence of an iceberg. 
+    
+    Identify the length of one row of an iceberg then, assuming all icebergs
+    are square, sum the height of the entire iceberg before multiplying by
+    900 kg/m3 (the mass density of ice) to get iceberg mass in kg. Append the
+    iceberg dimension, height and mass to the corresponding arrays.
+    
+    Params:
+        tempradar - copy of the radarenv 2D array file
+        templidar - copy of the lidarenv 2D array file
+        i - identifier for the number of rows
+        j - identifier for the number of columns
+    Returns:
+        print statement - appending berg values for a stated iceberg number
     '''
     
-#    print('checking berg footprint...') # successfully started the berg_footprint function
+#    print('checking berg footprint...') # shows successfully entered the function
     
     global berg_tot_height
     global berg_mass
@@ -112,7 +132,7 @@ def berg_footprint(tempradar, templidar, i, j):
     global num_of_bergs
   
     berg_start_row.append(i) # write row into row [] starting at berg 0 which is the 1st berg
-    berg_start_col.append(j) # write row into col [] starting at berg 0 which is the 1st berg
+    berg_start_col.append(j) # write col into col [] starting at berg 0 which is the 1st berg
     dimension = 1
     height = 0
 
@@ -122,32 +142,32 @@ def berg_footprint(tempradar, templidar, i, j):
         if j == 299: # if on last column
             if i == 299: # and if on last row
                 carry_on = False # stop
-#                print('carry on is false - bottom corner')
+#                print('carry on is false - bottom corner of grid')
                 
-        elif radarenv[i][j+1] == 0: # if next area has no ice
+        elif radarenv[i][j+1] == 0: # if next m3 cell has no ice
                 carry_on = False # stop
 #                print('carry on is false - no neighbouring ice')
                
-        elif radarenv[i][j+1] > 100: # if next m3 does have ice
-            j += 1 # look to column to the right
+        elif radarenv[i][j+1] > 100: # if next m3 cell has ice
+            j += 1 # add one to column
             dimension += 1
 #            print('added one to dimension, total:', dimension)
          
-    ii = berg_start_row[num_of_bergs-1] # because we append to the first item in a list
+    ii = berg_start_row[num_of_bergs-1] # copy of the start row for the number iceberg being looked at  
     
     while ii < (berg_start_row[num_of_bergs-1] + dimension):
         
-        jj = berg_start_col[num_of_bergs-1] # because we append to the first item in a list
+        jj = berg_start_col[num_of_bergs-1] # copy of the start col for the number iceberg being looked at  
         
         while jj < (berg_start_col[num_of_bergs-1] + dimension):
             
 #            print('ii:', ii, 'jj:', jj)
 #            print('start height:', height)
 #            print('cell value:', templidar[ii][jj])
-            height = height + templidar[ii][jj]
+            height = height + templidar[ii][jj] # cumulatively add height
 #            print('end height:', height)
 
-            tempradar[ii][jj] = 0 # set radar to 0 so we know we have looked at ice here
+            tempradar[ii][jj] = 0 # set tempradar value to 0 so we know we have dealt with the ice present here
                        
             jj += 1
 #            print('added j value:', jj)
@@ -163,16 +183,17 @@ def berg_footprint(tempradar, templidar, i, j):
     berg_mass.append(mass)
     
     
-# Call the iceberg function - this calls the berg_footprint function itself
+# call the find_ice function
 find_ice(tempradar, templidar)
 
 
 ## Return information about iceberg and print onto console
 #a = 0 # set counter to 0 ready for while loop
 #while a < num_of_bergs:
-#    print('Iceberg', a+1, 'is', berg_tot_height[a], 'm3 and weighs', berg_mass[a], 'kg') # tot height + m3 are the same because counted up total 1m3 squares
+#    # tot height + m3 are the same because counted up total 1m3 squares
+#    print('Iceberg', a+1, 'is', berg_tot_height[a], 'm3 and weighs', berg_mass[a], 'kg')
 #   
-#    if berg_mass[a] < 36000000:
+#    if berg_mass[a] < 36000000: # where 36 million kg is the maximum iceberg weight that can be tugged
 #        print('Iceberg', a+1, 'is towable')
 #        
 #    else:
@@ -186,14 +207,14 @@ find_ice(tempradar, templidar)
 
 def printoutputs():
     '''
-    Function to display the size and weight for each identified iceberg on
-    the GUI interface
+    Function to print iceberg metadata onto the GUI
     
-    Returns: Textual information:
-        Iceberg x, is y m3 and weighs z kg
-        Iceberg is or is NOT towable
-        A concluding statement that all icebergs have been identified
+    For each identified iceberg, display its number, size and weight on the GUI
     
+    Returns:
+        textual information - iceberg number and its size (m3) and weight (kg),
+        whether or not the iceberg is or is NOT towable and a concluding
+        statement that all icebergs have been identified 
     '''
     
     global berg_mass
@@ -202,11 +223,12 @@ def printoutputs():
     
     a = 0 # set counter to 0 ready for while loop
     while a < num_of_bergs:
-        
-        label = tkinter.Label(root, text = ("Iceberg {} is {} m3 and weighs {} kg".format(a+1, berg_tot_height[a], berg_mass[a]))) # tot height + m3 are the same because counted up total 1m3 squares
+       
+        # tot height + m3 are the same because counted up total 1m3 squares
+        label = tkinter.Label(root, text = ("Iceberg {} is {} m3 and weighs {} kg".format(a+1, berg_tot_height[a], berg_mass[a])))
         label.pack()
        
-        if berg_mass[a] < 36000000:
+        if berg_mass[a] < 36000000: # where 36 million kg is the maximum iceberg weight that can be tugged
             label1 = tkinter.Label(root, text = ("Iceberg {} is towable".format(a+1)))
             label1.pack()
             
@@ -228,25 +250,24 @@ a = 0  # set counter to 0 ready for while loop
 #print('start a:', a)
 while a < num_of_bergs:
 
-    ii = berg_start_row[a] # because we append to the first item in a list
+    ii = berg_start_row[a] # copy of the start row of the number iceberg being looked at  
     
     while ii < (berg_start_row[a] + berg_dimension[a]):
     
-        jj = berg_start_col[a] # because we append to the first item in a list
+        jj = berg_start_col[a] # copy of the start col for the number iceberg being looked at  
            
         while jj < (berg_start_col[a] + berg_dimension[a]):
             
 #            print('ii:', ii, 'jj:', jj)
-                
+
             if berg_mass[a] < 36000000:
-                
 #                print('towable ii:', ii, 'jj:', jj)
                 bergtowability[ii][jj] = 2
-#                print('added 1 to towable')
+#                print('added 2 as towable')
                      
             else:
                 bergtowability[ii][jj] = 0
-#                print('added 2 to NOT toable')
+#                print('added 0 as NOT toable')
                        
             jj += 1
 #            print('added 1 to j:', jj)

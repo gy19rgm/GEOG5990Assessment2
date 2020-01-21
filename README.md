@@ -46,12 +46,12 @@ A collection of checks have been commented into the model. To make checks, pleas
 
 * lines 33 & 34: print number of rows and columns identified in .radar grid (and subsequently .lidar grid as they are the same size)
 * lines 36 - 38: check the .radar data has correctly been read by displaying it as a figure in the console
-* lines 49 - 51: check the .lidar data has correctly been read by displaying it as a figure in the console
-* line 82: check function is reading each cell of the .radar file
-* line 105: check the berg_footprint function has successfully been called
-* lines 125, 129 & 134: check the berg_footprint function is responding to each cell it is looking at as expected
-* lines 144 - 146, 148, 153 & 156: check berg_footprint is sucessfully cumulatively adding to the iceberg's total height and looping correctly onto the next cell
-* lines 226, 239, 243, 245, 249, 252, 255 & 258: check the berg towability data grid is being assigned tow-ability values correctly and that each iceberg and the cells within are being looped through correctly
+* lines 50 - 52: check the .lidar data has correctly been read by displaying it as a figure in the console
+* lines 90 & 99: check function is reading each cell of the .radar file
+* line 125: check the berg_footprint function has successfully been called
+* lines 145, 149 & 154: check the berg_footprint function is responding to each cell it is looking at as expected
+* lines 164 - 166, 168, 173 & 176: check berg_footprint is sucessfully cumulatively adding to the iceberg's total height and looping correctly onto the next cell
+* lines 250, 261, 264,266, 270, 273, 276 & 279: check the berg towability data grid is being assigned tow-ability values correctly and that each iceberg and the cells within are being looped through correctly
 
 ## Potential further development / areas of improvement
 This model assumes the mass density of ice will always be 900 kg/m3.
