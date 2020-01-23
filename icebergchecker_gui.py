@@ -246,7 +246,7 @@ def printoutputs():
 bergtowability = [[1] * numrows for n in range(numcols)]
 
 # assign towability values (ready for figure presentation)
-a = 0  # set counter to 0 ready for while loop
+a = 0 # set counter to 0 ready for while loop
 #print('start a:', a)
 while a < num_of_bergs:
 
@@ -283,6 +283,24 @@ while a < num_of_bergs:
 #mpl.title('Icebergs locations and tow-ability')
 #cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", ["#d73027","#92c5de","#33a02c"]) # red, blue, green
 #mpl.imshow(bergtowability, cmap = cmap)
+
+
+# write textual data to file
+f = open("icebergmetadata.txt", "w")
+a = 0 # set counter to 0 ready for while loop
+while a < num_of_bergs:
+   
+    f.write('Iceberg number %d is %d m3 and weighs %d kg. ' % (a+1, berg_tot_height[a], berg_mass[a]))  
+   
+    if berg_mass[a] < 36000000: # where 36 million kg is the maximum iceberg weight that can be tugged
+        f.write('This iceberg is towable. \n')
+        
+    else:
+        f.write('This iceberg is NOT towable. \n')
+    
+    a += 1 # add one to counter
+
+f.close()
 
 
 # set up GUI

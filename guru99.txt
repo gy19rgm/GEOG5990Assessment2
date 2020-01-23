@@ -1,0 +1,6 @@
+Iceberg number 0 is 4 m3 and weighs 12 kg. 
+Iceberg 0 is towable. 
+Iceberg number 1 is 5 m3 and weighs 15 kg. 
+Iceberg 1 is NOT towable! 
+Iceberg number 2 is 6 m3 and weighs 16 kg. 
+Iceberg 2 is NOT towable! 

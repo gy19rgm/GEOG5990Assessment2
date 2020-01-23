@@ -8,15 +8,17 @@ This model was created in Spyder (Anaconda3). The version of python is version 3
 
 ### Repository Contents
 1. **LICENSE**: GNU General Public License v3.0
-2. **icebergchecker_gui.py**: Main code
-3. **test.lidar**: lidar grid created with one known iceberg for test purposes
-4. **test.radar**: radar grid created with one known iceberg for test purposes
-5. **white1.lidar**: lidar grid representing a 300 by 300 area of the sea with a single iceberg in
-6. **white1.radar**: radar grid representing a 300 by 300 area of the sea with a single iceberg in
-7. **white2.lidar**: lidar grid representing a 300 by 300 area of the sea with multiple icebergs in
-8. **white2.radar**: radar grid representing a 300 by 300 area of the sea with multiple icebergs in
-9. ________ SHORT DOCUMENT ________
-10. **README.md**: this file is the README.md file - it explains the contents of the GEOG5990Assessment2 repository
+2. **icebergchecker_gui.py**: MAIN working code that checks ocean for icebergs and displays outputs to the console and GUI
+3. **icebergchecker.py**: working code that checks ocean for icebergs and displays all outputs to the console
+4. **test.lidar**: lidar grid representing a 6 by 6 area with one known iceberg for test purposes
+5. **test.radar**: radar grid representing a 6 by 6 area with one known iceberg for test purposes
+6. **white1.lidar**: lidar grid representing a 300 by 300 area of the sea with a single iceberg in
+7. **white1.radar**: radar grid representing a 300 by 300 area of the sea with a single iceberg in
+8. **white2.lidar**: lidar grid representing a 300 by 300 area of the sea with multiple icebergs in
+9. **white2.radar**: radar grid representing a 300 by 300 area of the sea with multiple icebergs in
+10. ________ SHORT DOCUMENT ________
+11. **icebergmetadata.txt**: copy of the text document created in lines 289 - 303 of icebergchecker_gui.py
+12. **README.md**: this file is the README.md file - it explains the contents of the GEOG5990Assessment2 repository
 
 
 ### Prerequisites
@@ -36,7 +38,7 @@ Once the GUI is visible a figure displaying iceberg locations and their tow-abil
 ### Expectations
 Once the model is opened, a GUI will appear displaying a figure of iceberg locations and their tow-ability (as shown by colours where red is not towable and green is towable on a blue 'ocean' background). 
 
-To view the tow-ability values of each of the icebergs identified the user should choose 'Show tow-ability values' in the drop down menu or click the "Show tow-ability values" button. Upon pressing this button, two lines will appear for each iceberg identified. The first line will show the iceberg number, size in meters cubed, and weight in kg. The second line will the iceberg number and whether it "is towable" or "is NOT towable".
+To view the tow-ability values of each of the icebergs identified the user should choose 'Show tow-ability values' in the drop down menu or click the "Show tow-ability values" button. Upon pressing this button, two lines will appear for each iceberg identified. The first line will show the iceberg number, size in meters cubed, and weight in kg. The second line will the iceberg number and whether it "is towable" or "is NOT towable". The icebergs are numbered by the order in which the top left cell appears when reading the grid as one would read a 100 number square.
 
 ## Closing the model
 To close the model, the user can choose 'Exit model' in the drop down menu or click the "Exit" button.
@@ -63,4 +65,4 @@ R Martin, gy19rgm, University of Leeds
 
 
 ## License
-This project is licensed under the GNU General Public License v3.0 - see the [License.md](https://github.com/gy19rgm/GEOG5990Assessment1/blob/master/LICENSE) file for further details
+This project is licensed under the GNU General Public License v3.0 - see the [License.md](https://github.com/gy19rgm/GEOG5990Assessment2/blob/master/LICENSE) file for further details
