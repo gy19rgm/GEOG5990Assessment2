@@ -19,7 +19,7 @@ import tkinter
 
 
 # open radar file - 300m x 300m grid of m3 values between 0 and 255 where 100 or above is ice
-with open("white2.radar") as f:
+with open("white2.radar") as f: # change radar file name if using a personal file
     radarenv = []
     for line in f:
         parsed_line = str.split(line, ",")
@@ -38,7 +38,7 @@ numcols = len(radarenv[0])
 #mpl.imshow(radarenv)
 
 # open lidar file - 300m x 300m grid of m3 value between 0 and 255 where one lidar unit equals 10cm in height
-with open("white2.lidar") as f:
+with open("white2.lidar") as f: # change lidar file name if using a personal file
     lidarenv = []
     for line in f:
         parsed_line = str.split(line, ",")
