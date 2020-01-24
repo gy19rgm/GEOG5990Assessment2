@@ -139,8 +139,8 @@ def berg_footprint(tempradar, templidar, i, j):
     carry_on = True
 
     while carry_on == True:
-        if j == 299: # if on last column
-            if i == 299: # and if on last row
+        if j == numcols: # if on last column
+            if i == numrows: # and if on last row
                 carry_on = False # stop
 #                print('carry on is false - bottom corner of grid')
                 
@@ -331,6 +331,6 @@ root.config(menu=menubar)
 model_menu = tkinter.Menu(menubar)
 menubar.add_cascade(label="File", menu=model_menu)
 model_menu.add_command(label="Show tow-ability values", command=printoutputs)
-model_menu.add_command(label="Exit model", command=close)
+model_menu.add_command(label="Exit program", command=close)
 
 tkinter.mainloop()
