@@ -40,7 +40,7 @@ Once the GUI is visible a figure displaying iceberg locations and their tow-abil
 ### Expectations
 Once the model is opened, a GUI will appear displaying a figure of iceberg locations and their tow-ability. Berg tow-ability is shown through colour where red is not towable, green is towable and blue is the 'ocean' background. (See GEOG5990_Assessment2.docx for further information on this figure.)
 
-To view the tow-ability values of each of the icebergs identified the user should choose 'Show tow-ability values' in the drop down menu or click the "Show tow-ability values" button. Upon pressing this button, two lines will appear for each iceberg identified. The first line will show the iceberg number, size in meters cubed, and weight in kg. The second line will the iceberg number and whether it "is towable" or "is NOT towable". The icebergs are numbered by the order in which the top left cell appears when reading the grid as one would read a 100 number square.
+To view the tow-ability values of each of the icebergs identified the user should choose 'Show tow-ability values' in the drop down menu or click the "Show tow-ability values" button. Upon pressing this button, two lines will appear for each iceberg identified. The first line will show the iceberg number, size in meters cubed, and weight in kg. The second line will show the iceberg number and whether it "is towable" or "is NOT towable". The icebergs are numbered by the order in which the top left cell appears when reading the grid as one would read a 100 number square.
 
 Upon running the program a text file called icebergmetadata.txt will be saved into the personal folder you are working in. This text file will contain the textual information about iceberg number, size, weight and tow-ability.
 
@@ -60,9 +60,9 @@ A collection of checks have been commented into the model. To make checks, pleas
 * lines 250, 261, 264, 266, 270, 273, 276 & 279: check the berg tow-ability data grid is being assigned tow-ability values correctly and that each iceberg and the cells within are being looped through correctly
 
 ## Potential further development / areas for improvement
-This model assumes the mass density of ice will always be 900 kg/m3.
+This model assumes the mass density of ice will always be exactly 900 kg/m3.
 
-This model was designed under the assumption that icebergs are always regular cuboids. Future development would include the repeat of the ideas in lines 121 - 134 (of icebergchecker_gui.py) to calculate the dimension of the iceberg for number of rows instead of number of columns.
+This model was designed under the assumption that icebergs are always regular cuboids. Future development would include the repeat of the ideas in lines 141 - 154 (of icebergchecker_gui.py) to calculate the dimension of the iceberg for number of rows instead of number of columns.
 
 See GEOG5990_Assessment2.docx for more detailed information on future development and areas for improvement.
 

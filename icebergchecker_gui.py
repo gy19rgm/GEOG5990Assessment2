@@ -302,6 +302,8 @@ while a < num_of_bergs:
 
 f.close()
 
+def close():
+    root.destroy()
 
 # set up GUI
 root = tkinter.Tk()
@@ -311,16 +313,12 @@ fig = mpl.figure(1)
 mpl.title('Icebergs locations and their tow-ability')
 mpl.xlabel('Distance (m)')
 mpl.ylabel('Distance (m)')
- 
 cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", ["#d73027","#92c5de","#33a02c"]) # red, blue, green
 mpl.imshow(bergtowability, cmap = cmap)
 
 canvas = FigureCanvasTkAgg(fig, master=root)
 canvas.draw()
 canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
-
-def close():
-    root.destroy()
 
 button1 = tkinter.Button(master=root, text="Exit", command=close)
 button1.pack(side=tkinter.BOTTOM)
