@@ -26,7 +26,7 @@ This model was created in Spyder (Anaconda3). The version of python is version 3
 ### Prerequisites
 Download the relevant files from this repository into your personal folder:
 * icebergchecker_gui - main code which reads a lidar and radar file to identify if ice is present and return metadata about identified icebergs
-* one radar and lidar files - these two files must be a corresponding pair of lidar and radar files
+* one radar and lidar files - these two files must be a corresponding pair of lidar and radar files. **If providing personal radar and lidar files, the user MUST change the name of the input file in iceberg.py. Change line 22 for the radar file and line 41 for the lidar file.**
 
 If using Spyder, the backend may need to be change in order for matplotlib to render the graphics succesfully. For this application, "Inline" graphics are suitable. This can be set in Spyder by selecting 'Tools' > 'Preferences' > 'IPython console' > 'Graphics' > adjust the backend drop-down list to read Inline > Apply > OK > Restart Spyder
 
